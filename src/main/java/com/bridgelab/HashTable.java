@@ -1,7 +1,6 @@
 package com.bridgelab;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class HashTable {
@@ -9,7 +8,7 @@ public class HashTable {
     private int size;
     private HNode array[];
 
-  //default constructor
+    //default constructor
     public HashTable() {
         this(100);
     }
@@ -25,7 +24,7 @@ public class HashTable {
         private Integer key;
         private String value;
         private HNode next;
-      // Hash Node constructor
+        // Hash Node constructor
         public HNode(Integer key, String value) {
             this.key = key;
             this.value = value;
@@ -62,58 +61,44 @@ public class HashTable {
     //Checking given string no.of times in Hash Table
     public int frequenceCheck(String value) {
         HNode node = array[0];
-        int count = 0;
+        int wordCount = 1;
         while (node != null) {
             if (node.value.equals(value)) {
-                count++;
+                wordCount++;
             }
             node = node.next;
         }
-        return count;
+        return wordCount;
     }
 
-    //this method check the value of given key and return corresponding value
-    public String getKey(Integer key){
-        int arrayIndex=getIndex(key);
-        HNode head=array[arrayIndex];
-        while (head!=null){
-            if(head.key.equals(key)){
+    //Checking the values of the key
+    public String getKeyValue(Integer key){
+        int arrayIndex = getIndex(key);
+        HNode head = array[arrayIndex];
+        while (head != null){
+            if (head.key.equals(key)){
                 return head.value;
             }
-            head=head.next;
+            head = head.next;
         }
         return null;
     }
-
-    //
-    public void frequencOfWords(String value){
-        Map<String, Integer> map=new HashMap<>();
-        String array[]=value.split(" ");
-        for (int i=0;i<array.length;i++){
-            if (map.containsKey(array[i])){
-                map.put(array[i],map.get(array[i]+1));
-            }
-            else
-                map.put(array[i],1);
-        }
-        for (Map.Entry<String, Integer> entry: map.entrySet()) {
-            System.out.println(entry.getKey() + "->" + entry.getValue());
-        }
-    }
-
-    //this method will remove word
-    public void removeWord(String value){
+    //find frequency of words in a large paragraph phrase
+    public void freqOfWords(String str){
         Map<String, Integer> map = new HashMap<>();
-
-        Iterator<String> word = map.keySet().iterator();
-        while (word.hasNext()){
-            if (word.next().equals(value)){
-                word.remove();
+        String array[] = str.split(" ");
+        for (int i=0; i<array.length; i++){
+            if(map.containsKey(array[i])){
+                map.put(array[i], map.get(array[i])+1);
+            }else {
+                map.put(array[i], 1);
             }
+        }
+        for (Map.Entry<String, Integer> entry: map.entrySet()){
+            System.out.println(entry.getKey()+ "->"+entry.getValue());
         }
     }
 
-    //main method
     public static void main(String[] args) {
         //System.out.println("*********************HASH TABLE**********************");
         //creating object of HashTable
@@ -136,15 +121,13 @@ public class HashTable {
         System.out.println("The size of hash table : " + hashTable.size);
 
         //Checking the values of the key
-        System.out.println("Finding Given key value : "+hashTable.getKey(10));
+        System.out.println("Finding Given key value : "+hashTable.getKeyValue(20));
 
-        //checking the frequency of word in paragraph
-        String paragraph = "paranoids are not paranoids because they are paranoid but " +
-                "they keep putting themselves deliberately into paranoid avoidable situation";
-        System.out.println("Given Para String : " + paragraph);
-        hashTable.frequencOfWords(paragraph);
+        String paragraph = "paranoids are not paranoids because they are paranoid but they keep " +
+                "putting themselves deliberately into paranoid avoidable situation";
+        System.out.println("Given Paragraph : " + paragraph);
 
-        //removing word "but"
-        hashTable.removeWord("but");
+        //Checking frequency of words in paragraph
+        hashTable.freqOfWords(paragraph);
     }
 }
