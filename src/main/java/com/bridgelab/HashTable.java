@@ -1,6 +1,7 @@
 package com.bridgelab;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class HashTable {
@@ -99,6 +100,18 @@ public class HashTable {
         }
     }
 
+    //this method is used to remove word from given string
+    public void removeWord(String str) {
+        Map<String, Integer> map = new HashMap<>();
+
+        Iterator<String> word = map.keySet().iterator();
+        while (word.hasNext()){
+            if (word.next().equals(str)){
+                word.remove();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         //System.out.println("*********************HASH TABLE**********************");
         //creating object of HashTable
@@ -123,11 +136,14 @@ public class HashTable {
         //Checking the values of the key
         System.out.println("Finding Given key value : "+hashTable.getKeyValue(20));
 
-        String paragraph = "paranoids are not paranoids because they are paranoid but they keep " +
+        String paragraph = "paranoids are not paranoids because they are paranoid but because they keep " +
                 "putting themselves deliberately into paranoid avoidable situation";
         System.out.println("Given Paragraph : " + paragraph);
 
         //Checking frequency of words in paragraph
         hashTable.freqOfWords(paragraph);
+
+        //removing word from paragraph
+        hashTable.removeWord("but");
     }
 }
