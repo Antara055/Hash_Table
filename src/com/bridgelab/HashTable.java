@@ -58,14 +58,14 @@ public class HashTable {
     //Checking given string no.of times in Hash Table
     public int frequenceCheck(String value) {
         HNode node = array[0];
-        int count = 0;
+        int wordCount = 1;
         while (node != null) {
             if (node.value.equals(value)) {
-                count++;
+                wordCount++;
             }
             node = node.next;
         }
-        return count;
+        return wordCount;
     }
 
 
